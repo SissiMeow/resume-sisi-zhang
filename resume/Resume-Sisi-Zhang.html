@@ -339,13 +339,102 @@ a:hover { color: var(--color-accent-hover); }
 }
 
 /* ─── About ─── */
+/* ─── About layout ─── */
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--space-2xl);
+  align-items: start;
+  margin-bottom: var(--space-3xl);
+}
+
 .about-narrative {
   font-size: 1.0625rem;
   line-height: 1.75;
   color: var(--color-text);
-  max-width: 640px;
-  margin-bottom: var(--space-3xl);
 }
+
+/* ─── Skill Chart (Dot Matrix) ─── */
+.skill-chart {
+  padding: 0;
+}
+
+.skill-chart-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-lg);
+}
+
+.dot-matrix {
+  display: grid;
+  grid-template-columns: 1fr repeat(4, 36px);
+  grid-auto-rows: auto;
+  gap: 0;
+  align-items: stretch;
+}
+
+.dot-matrix-header {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--color-text-tertiary);
+  text-align: center;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  padding-bottom: var(--space-sm);
+}
+
+.dot-matrix-divider {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.dot-matrix-skill {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text);
+  padding: 10px 8px 10px 0;
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+}
+
+.dot-matrix-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dot-matrix-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 400ms var(--ease-out-quart), transform 400ms var(--ease-out-quart);
+}
+
+.skill-chart.visible .dot-matrix-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.dot-matrix-dot[data-delay="1"] { transition-delay: 80ms; }
+.dot-matrix-dot[data-delay="2"] { transition-delay: 160ms; }
+.dot-matrix-dot[data-delay="3"] { transition-delay: 240ms; }
+.dot-matrix-dot[data-delay="4"] { transition-delay: 320ms; }
+.dot-matrix-dot[data-delay="5"] { transition-delay: 400ms; }
+.dot-matrix-dot[data-delay="6"] { transition-delay: 480ms; }
+.dot-matrix-dot[data-delay="7"] { transition-delay: 560ms; }
+.dot-matrix-dot[data-delay="8"] { transition-delay: 640ms; }
+.dot-matrix-dot[data-delay="9"] { transition-delay: 720ms; }
+.dot-matrix-dot[data-delay="10"] { transition-delay: 800ms; }
 
 .about-narrative strong {
   font-weight: 600;
@@ -428,6 +517,7 @@ a:hover { color: var(--color-accent-hover); }
   color: var(--color-text-secondary);
   line-height: 1.6;
   max-width: 560px;
+  text-align: justify;
 }
 
 .journey-tag {
@@ -575,6 +665,29 @@ a:hover { color: var(--color-accent-hover); }
 .project-highlight {
   font-weight: 600;
   color: var(--color-text);
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: var(--space-md);
+}
+
+.project-tag-pill {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-accent);
+  background: var(--color-accent-subtle);
+  padding: 3px 10px;
+  border-radius: 3px;
+}
+
+.project-impact {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
 }
 
 /* ─── Gallery ─── */
@@ -949,6 +1062,10 @@ a:hover { color: var(--color-accent-hover); }
 
   .section { padding: var(--space-3xl) 0; }
 
+  .about-content {
+    grid-template-columns: 1fr;
+  }
+
   .about-metrics {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
@@ -1165,16 +1282,93 @@ a:hover { color: var(--color-accent-hover); }
 <!-- ─── About ─── -->
 <section class="section" id="about">
   <div class="container">
-    <p class="section-label reveal">
-      <span class="lang-en">About</span><span class="lang-cn">关于我</span>
-    </p>
-    <div class="about-narrative reveal">
-      <span class="lang-en">
-        <strong>I find the signals others miss.</strong> Over seven years in sportswear, retail, and QSR — including five years shaping Nike's Kids and Women's strategies — I've built a career on reading markets and translating what I see into products people want. I pioneered AI-enabled research workflows before they became common practice, identified whitespace opportunities that launched entirely new categories, and turned complex data into narratives that move cross-functional teams to action. I'm driven by an enduring curiosity: a belief that the best insights come from asking better questions, learning new tools, and never settling for the obvious answer.
-      </span>
-      <span class="lang-cn">
-        <strong>我发现别人忽略的信号。</strong>在运动、零售和快餐行业的七年里——包括五年为 Nike 童装和女装品类制定策略——我一直在读懂市场、将洞察转化为消费者真正需要的产品。我在 AI 研究工作流尚未成为主流时就率先实践，发现空白机会推动全新品类诞生，将复杂数据转化为推动跨职能团队行动的叙事。驱动我的是一种持久的好奇心：相信最好的洞察来自于提出更好的问题、学习新工具，以及永不满足于显而易见的答案。
-      </span>
+    <div class="about-content">
+      <div>
+        <p class="section-label reveal">
+          <span class="lang-en">About</span><span class="lang-cn">关于我</span>
+        </p>
+        <div class="about-narrative reveal">
+          <span class="lang-en">
+            <strong>I find the signals others miss — and I build the tools to find them faster.</strong> With roots in IT and both vendor- and brand-side experience, I bring a rare combination: technical depth that amplifies AI and agent-powered workflows, and seven years of commercial acumen honed at Nike, McDonald's, and Burger King. I pioneered agent-driven research that achieves 10× efficiency — not just faster execution, but expanding the frontier of what insights can uncover. The result: whitespace opportunities that launched new product categories, and data narratives that move cross-functional teams to action at VP level.
+          </span>
+          <span class="lang-cn">
+            <strong>我发现别人忽略的信号——并构建更快发现它们的工具。</strong>从 IT 技术和乙方产品管理起步，到甲方品牌策略，我拥有一种稀缺的复合视角：能将 AI 与 Agent 工作流推向深层应用的技术底蕴，以及在 Nike、麦当劳、汉堡王积累的七年商业洞察力。我率先实践 Agent 驱动的研究工作流，实现 10 倍效率提升——不只是加速执行，而是拓展洞察所能触达的边界。成果：发现市场空白推动全新品类诞生，以数据叙事驱动跨职能团队在 VP 层级的行动决策。
+          </span>
+        </div>
+      </div>
+      <div class="skill-chart reveal">
+        <p class="skill-chart-title">
+          <span class="lang-en">Core Competencies</span>
+          <span class="lang-cn">核心能力</span>
+        </p>
+        <div class="dot-matrix">
+          <span class="dot-matrix-header"></span>
+          <span class="dot-matrix-header">Esri</span>
+          <span class="dot-matrix-header">BK</span>
+          <span class="dot-matrix-header">McD</span>
+          <span class="dot-matrix-header">Nike</span>
+          <span class="dot-matrix-divider"></span>
+
+          <span class="dot-matrix-skill">
+            <span class="lang-en">AI & Agent-Powered Workflow</span>
+            <span class="lang-cn">AI & Agent 驱动工作流</span>
+          </span>
+          <span class="dot-matrix-cell"></span>
+          <span class="dot-matrix-cell"></span>
+          <span class="dot-matrix-cell"></span>
+          <span class="dot-matrix-cell"><span class="dot-matrix-dot" data-delay="1"></span></span>
+          <span class="dot-matrix-divider"></span>
+
+          <span class="dot-matrix-skill">
+            <span class="lang-en">Market & Consumer Intelligence</span>
+            <span class="lang-cn">市场与消费者洞察</span>
+          </span>
+          <span class="dot-matrix-cell"><span class="dot-matrix-dot" data-delay="2"></span></span>
+          <span class="dot-matrix-cell"></span>
+          <span class="dot-matrix-cell"></span>
+          <span class="dot-matrix-cell"><span class="dot-matrix-dot" data-delay="3"></span></span>
+          <span class="dot-matrix-divider"></span>
+
+          <span class="dot-matrix-skill">
+            <span class="lang-en">Competitive & Product Strategy</span>
+            <span class="lang-cn">竞品与产品策略</span>
+          </span>
+          <span class="dot-matrix-cell"></span>
+          <span class="dot-matrix-cell"></span>
+          <span class="dot-matrix-cell"></span>
+          <span class="dot-matrix-cell"><span class="dot-matrix-dot" data-delay="4"></span></span>
+          <span class="dot-matrix-divider"></span>
+
+          <span class="dot-matrix-skill">
+            <span class="lang-en">Data Viz & Storytelling</span>
+            <span class="lang-cn">数据可视化与叙事</span>
+          </span>
+          <span class="dot-matrix-cell"></span>
+          <span class="dot-matrix-cell"><span class="dot-matrix-dot" data-delay="5"></span></span>
+          <span class="dot-matrix-cell"></span>
+          <span class="dot-matrix-cell"><span class="dot-matrix-dot" data-delay="6"></span></span>
+          <span class="dot-matrix-divider"></span>
+
+          <span class="dot-matrix-skill">
+            <span class="lang-en">Data Modeling & Analytics</span>
+            <span class="lang-cn">数据建模与分析</span>
+          </span>
+          <span class="dot-matrix-cell"><span class="dot-matrix-dot" data-delay="7"></span></span>
+          <span class="dot-matrix-cell"><span class="dot-matrix-dot" data-delay="8"></span></span>
+          <span class="dot-matrix-cell"><span class="dot-matrix-dot" data-delay="9"></span></span>
+          <span class="dot-matrix-cell"><span class="dot-matrix-dot" data-delay="10"></span></span>
+          <span class="dot-matrix-divider"></span>
+
+          <span class="dot-matrix-skill">
+            <span class="lang-en">Product & System Design</span>
+            <span class="lang-cn">产品与系统设计</span>
+          </span>
+          <span class="dot-matrix-cell"><span class="dot-matrix-dot" data-delay="7"></span></span>
+          <span class="dot-matrix-cell"><span class="dot-matrix-dot" data-delay="8"></span></span>
+          <span class="dot-matrix-cell"></span>
+          <span class="dot-matrix-cell"></span>
+        </div>
+      </div>
     </div>
     <div class="about-metrics reveal-stagger">
       <div class="metric reveal" style="--stagger: 0">
@@ -1224,8 +1418,8 @@ a:hover { color: var(--color-accent-hover); }
             <span class="lang-cn">资深洞察分析师</span>
           </p>
           <p class="journey-desc">
-            <span class="lang-en">Leading China market and consumer insights for Kids and Women's categories. Integrating commercial, competitor, and social signals to inform product strategy and merchandising direction. Managing research vendors with budget accountability up to RMB 1M.</span>
-            <span class="lang-cn">主导 Nike 中国市场童装和女装品类的消费者洞察，整合商业、竞争对手和社交信号为产品策略与商品规划提供方向。管理研究供应商，预算规模达 100 万元。</span>
+            <span class="lang-en">Pioneered AI-native research workflows since 2023, evolving to Cursor agent–driven data analysis and interactive HTML deliverables, achieving 10× efficiency. Progressed through three roles — location analytics, product insights, and merchandising strategy — with expanding scope and decision influence up to VP-level leadership. Independently owned end-to-end consumer and competitive analysis for Kids and Women's categories: market landscape scans, competitor strategy teardowns, and product-level deep dives, synthesizing internal sales data with external signals (e-commerce, social media, public sources, academic research). Managed full research vendor lifecycle — study design, deliverable quality control, and budget negotiation (up to RMB 1M).</span>
+            <span class="lang-cn">2023 年起率先引入 AI 工具，逐步进化至 Cursor Agent 驱动的数据分析与交互式 HTML 交付，实现 10 倍效率提升。在 Nike 历经三个角色——从门店选址分析到产品洞察再到商品企划策略——职责范围与决策影响力逐步扩大至 VP 层级。独立负责童装和女装品类的端到端消费者与竞品分析：市场全景扫描、竞品策略拆解、产品层级深度研究，整合内部销售数据与外部信号（电商、社媒、公开资讯、学术研究）。全权管理研究供应商全流程——研究方案设计、交付质量把控与预算管理（百万级）。</span>
           </p>
           <span class="journey-tag">
             <span class="lang-en">Sportswear · Consumer & Marketplace Insights</span>
@@ -1243,8 +1437,8 @@ a:hover { color: var(--color-accent-hover); }
             <span class="lang-cn">策略规划师</span>
           </p>
           <p class="journey-desc">
-            <span class="lang-en">Supported store expansion strategy through location analysis and revenue forecasting for China market planning.</span>
-            <span class="lang-cn">通过选址分析和收入预测支持中国市场门店拓展策略。</span>
+            <span class="lang-en">Developed revenue forecasting models to predict annual sales potential for prospective restaurant locations, informing site investment decisions for China market expansion.</span>
+            <span class="lang-cn">开发营收预测模型，预测候选餐厅选址的年度销售潜力，为中国市场门店投资决策提供依据。</span>
           </p>
           <span class="journey-tag">
             <span class="lang-en">QSR · Location Strategy Planning</span>
@@ -1262,8 +1456,8 @@ a:hover { color: var(--color-accent-hover); }
             <span class="lang-cn">数据分析副经理</span>
           </p>
           <p class="journey-desc">
-            <span class="lang-en">Conducted market and competitor analysis for business planning. Automated recurring reporting workflows and improved analysis efficiency.</span>
-            <span class="lang-cn">为业务规划进行市场和竞争对手分析，自动化常规报告工作流并提升分析效率。</span>
+            <span class="lang-en">Built the company's location analytics infrastructure from the ground up: designed and launched a centralized database integrating cross-departmental data into a unified site-selection workflow with automated data routing and approval chains, replacing entirely manual processes. Developed a GIS-based mapping system applying regression and clustering models with business-tailored feature engineering to support site-selection decisions and spatial data visualization.</span>
+            <span class="lang-cn">从零搭建公司选址分析基础设施：设计并上线集中式数据库，将跨部门数据整合至统一的选址工作流系统，实现数据流转与节点审批自动化，替代全手工流程。开发基于 GIS 的地图系统，应用回归与聚类模型并结合业务导向的特征工程，辅助选址决策与空间数据可视化呈现。</span>
           </p>
           <span class="journey-tag">
             <span class="lang-en">QSR · Location Based Analytics</span>
@@ -1281,8 +1475,8 @@ a:hover { color: var(--color-accent-hover); }
             <span class="lang-cn">IT 系统技术顾问（产品经理）</span>
           </p>
           <p class="journey-desc">
-            <span class="lang-en">Designed GIS-based data solutions for sports and F&B clients. Defined product features, authored PRDs, and built interactive mockup prototypes for enterprise information systems. Converted business questions into technical analysis frameworks.</span>
-            <span class="lang-cn">为运动和餐饮客户设计基于 GIS 的数据解决方案。负责企业信息系统的功能设计，撰写 PRD 并制作可交互原型图，将业务问题转化为技术分析框架。</span>
+            <span class="lang-en">Owned the full product lifecycle for enterprise GIS location analytics systems serving Adidas, Starbucks, and McDonald's: requirements discovery, technical and business-logic assessment, PRD authoring, and development oversight through delivery. Approached client needs with a consumer-centric lens — evaluating requirement feasibility and recommending optimal solutions over literal feature requests to ensure system maintainability and scalability.</span>
+            <span class="lang-cn">全流程负责企业级 GIS 选址系统的产品管理，服务客户包括 Adidas、星巴克和麦当劳：需求挖掘、技术与业务逻辑评估、PRD 撰写、开发过程管控到交付质量保障。以用户为中心审视客户需求——评估需求合理性并给出最优功能建议，而非简单执行表面诉求，确保系统的可维护性与可扩展性。</span>
           </p>
           <span class="journey-tag">
             <span class="lang-en">GIS · Tech · Product</span>
@@ -1348,125 +1542,7 @@ a:hover { color: var(--color-accent-hover); }
     </h2>
 
     <div class="projects-grid">
-      <!-- Project 1 -->
-      <article class="project-card reveal">
-        <div class="project-header" onclick="toggleProject(this)">
-          <div class="project-image">
-            <img src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2023%2F11%2Fnike-swoosh-1-announcement-info-4.jpg?w=1440&cbr=1&q=90&fit=max" alt="Nike Swoosh 1 Pre-Walker" />
-          </div>
-          <div>
-            <h3 class="project-title">
-              <span class="lang-en">Swoosh 1 Pre-Walker Launch</span>
-              <span class="lang-cn">Swoosh 1 学步鞋项目</span>
-            </h3>
-            <p class="project-brief">
-              <span class="lang-en">Identified whitespace in toddler pre-walker footwear and built the business case that initiated Nike's first pre-walker shoe program.</span>
-              <span class="lang-cn">发现幼儿学步鞋的市场空白，构建商业论证推动 Nike 首个学步鞋项目启动。</span>
-            </p>
-          </div>
-          <button class="project-toggle" aria-label="Expand details">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-        </div>
-        <div class="project-details">
-          <div class="project-details-inner">
-            <div class="project-details-content">
-              <ul>
-                <li>
-                  <span class="lang-en">Acted as a key contributor bridging local market evidence and global product brief intake.</span>
-                  <span class="lang-cn">作为关键贡献者，连接本地市场证据与全球产品简报输入。</span>
-                </li>
-                <li>
-                  <span class="lang-en"><span class="project-highlight">Drove insight-to-launch progression over approximately 1.5–2 years.</span></span>
-                  <span class="lang-cn"><span class="project-highlight">推动洞察到上市的全流程，历时约 1.5–2 年。</span></span>
-                </li>
-                <li>
-                  <span class="lang-en"><span class="project-highlight">Supported early growth into a pillar category with estimated impact of ~5–10%.</span></span>
-                  <span class="lang-cn"><span class="project-highlight">支持其成长为支柱品类，预估影响力约 5–10%。</span></span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Project 2 -->
-      <article class="project-card reveal">
-        <div class="project-header" onclick="toggleProject(this)">
-          <div class="project-image">
-            <img src="https://threadsboutique.net/cdn/shop/files/color-block-solid-loose-fit-drop-shoulder-hoodie-317959.jpg?v=1763155833&width=1346" alt="Drop Shoulder Fleece" style="transform: scale(1.6); object-position: center 30%;" />
-          </div>
-          <div>
-            <h3 class="project-title">
-              <span class="lang-en">Women's Fleece "Drop Shoulder Adoption"</span>
-              <span class="lang-cn">女装摇粒绒「落肩设计」</span>
-            </h3>
-            <p class="project-brief">
-              <span class="lang-en">Diagnosed a product structure gap where women's fleece was largely a downsized men's H-shape construction, and demonstrated that drop-shoulder design better aligned with market preference.</span>
-              <span class="lang-cn">诊断产品结构问题——女装摇粒绒基本是男装 H 型版型的缩小版，并论证落肩设计更符合市场偏好。</span>
-            </p>
-          </div>
-          <button class="project-toggle" aria-label="Expand details">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-        </div>
-        <div class="project-details">
-          <div class="project-details-inner">
-            <div class="project-details-content">
-              <ul>
-                <li>
-                  <span class="lang-en">Demonstrated through market and competitor product analysis that authentic oversize preference was better aligned with drop-shoulder design cues.</span>
-                  <span class="lang-cn">通过市场和竞品分析，证明真正的 oversize 偏好更适配落肩设计语言。</span>
-                </li>
-                <li>
-                  <span class="lang-en"><span class="project-highlight">Informed product structure redesign direction and improved category positioning relevance.</span></span>
-                  <span class="lang-cn"><span class="project-highlight">指导产品结构重新设计方向，提升品类定位的市场相关性。</span></span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Project 3 -->
-      <article class="project-card reveal">
-        <div class="project-header" onclick="toggleProject(this)">
-          <div class="project-image">
-            <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=640&q=80&auto=format" alt="Tennis" style="object-position: center center;" />
-          </div>
-          <div>
-            <h3 class="project-title">
-              <span class="lang-en">The State of Tennis</span>
-              <span class="lang-cn">网球运动现状研究</span>
-            </h3>
-            <p class="project-brief">
-              <span class="lang-en">Decoded the current tennis landscape through three strategic lenses — tournaments, athletes, and products — benchmarking competitors such as Lululemon and Wilson to identify product strategy gaps and inform future direction.</span>
-              <span class="lang-cn">通过赛事、运动员和产品三大战略框架解码当前网球运动格局，对标 Lululemon、Wilson 等竞品，分析产品策略差异，确定未来产品方向。</span>
-            </p>
-          </div>
-          <button class="project-toggle" aria-label="Expand details">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-        </div>
-        <div class="project-details">
-          <div class="project-details-inner">
-            <div class="project-details-content">
-              <ul>
-                <li>
-                  <span class="lang-en">Built a reusable competitive analysis framework structured around tournaments, athletes, and product ecosystems to systematically assess market positioning across the tennis category.</span>
-                  <span class="lang-cn">构建了以赛事、运动员和产品生态为核心的可复用竞品分析框架，系统评估网球品类的市场定位。</span>
-                </li>
-                <li>
-                  <span class="lang-en"><span class="project-highlight">Identified strategic gaps between Nike and key competitors (Lululemon, Wilson) in tennis product offerings, driving targeted improvement recommendations.</span></span>
-                  <span class="lang-cn"><span class="project-highlight">发现 Nike 与关键竞品（Lululemon、Wilson）在网球产品线上的战略差距，推动了针对性的改进建议。</span></span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Project 4 -->
+      <!-- Project 1: Colorway Study -->
       <article class="project-card reveal">
         <div class="project-header" onclick="toggleProject(this)">
           <div class="project-image">
@@ -1489,16 +1565,128 @@ a:hover { color: var(--color-accent-hover); }
         <div class="project-details">
           <div class="project-details-inner">
             <div class="project-details-content">
-              <ul>
-                <li>
-                  <span class="lang-en">Pioneered an AI agent–powered workflow to produce interactive HTML slide decks, establishing a new presentation format for data-rich color insights across the organization.</span>
-                  <span class="lang-cn">率先采用 AI Agent 驱动的工作流生成交互式 HTML 幻灯片，为全公司数据密集型配色洞察建立了全新的呈现方式。</span>
-                </li>
-                <li>
-                  <span class="lang-en"><span class="project-highlight">Established a systematic color research framework covering runway fashion and social media OOTD trends across casual and sportswear categories, with ongoing deep-dive analysis in progress.</span></span>
-                  <span class="lang-cn"><span class="project-highlight">建立了涵盖秀场时装和社交媒体 OOTD 趋势的系统性颜色研究框架，覆盖休闲和运动服饰品类，持续深入分析中。</span></span>
-                </li>
-              </ul>
+              <div class="project-tags">
+                <span class="project-tag-pill">AI Agent Workflow</span>
+                <span class="project-tag-pill">Color Trend Analysis</span>
+                <span class="project-tag-pill">Social Media Analytics</span>
+                <span class="project-tag-pill">Data Visualization</span>
+              </div>
+              <p class="project-impact">
+                <span class="lang-en">Pioneered an AI agent–powered workflow to produce the company's first interactive HTML slide deliverable. Established a systematic color research framework covering runway fashion and social media OOTD trends across casual and sportswear categories.</span>
+                <span class="lang-cn">率先采用 AI Agent 驱动的工作流，产出全公司首个交互式 HTML 幻灯片交付物。建立了涵盖秀场时装和社交媒体 OOTD 趋势的系统性颜色研究框架，覆盖休闲和运动服饰品类。</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 2: Swoosh 1 Pre-Walker Launch -->
+      <article class="project-card reveal">
+        <div class="project-header" onclick="toggleProject(this)">
+          <div class="project-image">
+            <img src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2023%2F11%2Fnike-swoosh-1-announcement-info-4.jpg?w=1440&cbr=1&q=90&fit=max" alt="Nike Swoosh 1 Pre-Walker" />
+          </div>
+          <div>
+            <h3 class="project-title">
+              <span class="lang-en">Swoosh 1 Pre-Walker Launch</span>
+              <span class="lang-cn">Swoosh 1 学步鞋项目</span>
+            </h3>
+            <p class="project-brief">
+              <span class="lang-en">Identified whitespace in toddler pre-walker footwear and built the business case that initiated Nike's first pre-walker shoe program.</span>
+              <span class="lang-cn">发现幼儿学步鞋的市场空白，构建商业论证推动 Nike 首个学步鞋项目启动。</span>
+            </p>
+          </div>
+          <button class="project-toggle" aria-label="Expand details">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+        </div>
+        <div class="project-details">
+          <div class="project-details-inner">
+            <div class="project-details-content">
+              <div class="project-tags">
+                <span class="project-tag-pill">Market Sizing</span>
+                <span class="project-tag-pill">Competitive Mapping</span>
+                <span class="project-tag-pill">Business Case</span>
+                <span class="project-tag-pill">E-commerce Retail Analysis</span>
+              </div>
+              <p class="project-impact">
+                <span class="lang-en">Identified the 0–2 age segment as an unserved whitespace, built the data-backed business case with China market evidence, and drove the initiative from insight to product launch over ~1.5 years. The category grew into a pillar line with ~5–10% estimated impact.</span>
+                <span class="lang-cn">发现 0–2 岁年龄段为未被服务的市场空白，基于中国市场数据构建商业论证，推动项目从洞察到产品上市历时约 1.5 年。该品类成长为支柱产品线，预估贡献约 5–10%。</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 3: Women's Fleece "Drop Shoulder Adoption" -->
+      <article class="project-card reveal">
+        <div class="project-header" onclick="toggleProject(this)">
+          <div class="project-image">
+            <img src="https://threadsboutique.net/cdn/shop/files/color-block-solid-loose-fit-drop-shoulder-hoodie-317959.jpg?v=1763155833&width=1346" alt="Drop Shoulder Fleece" style="transform: scale(1.6); object-position: center 30%;" />
+          </div>
+          <div>
+            <h3 class="project-title">
+              <span class="lang-en">Women's Fleece "Drop Shoulder Adoption"</span>
+              <span class="lang-cn">女装摇粒绒「落肩设计」</span>
+            </h3>
+            <p class="project-brief">
+              <span class="lang-en">Diagnosed a product structure gap where women's fleece was largely a downsized men's H-shape construction, and demonstrated that drop-shoulder design better aligned with market preference.</span>
+              <span class="lang-cn">诊断产品结构问题——女装摇粒绒基本是男装 H 型版型的缩小版，并论证落肩设计更符合市场偏好。</span>
+            </p>
+          </div>
+          <button class="project-toggle" aria-label="Expand details">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+        </div>
+        <div class="project-details">
+          <div class="project-details-inner">
+            <div class="project-details-content">
+              <div class="project-tags">
+                <span class="project-tag-pill">Competitor Product Teardown</span>
+                <span class="project-tag-pill">Market Trend Analysis</span>
+                <span class="project-tag-pill">Product Structure Diagnosis</span>
+              </div>
+              <p class="project-impact">
+                <span class="lang-en">Diagnosed that women's fleece was largely a downsized men's H-shape construction, then used competitor product analysis and market trend data to demonstrate that drop-shoulder design better aligned with authentic oversize preference. Informed product structure redesign direction for improved category relevance.</span>
+                <span class="lang-cn">诊断出女装摇粒绒基本是男装 H 型版型的缩小版，通过竞品产品分析和市场趋势数据论证落肩设计更符合真正的 oversize 偏好。指导产品结构重新设计方向，提升品类市场相关性。</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 4: The State of Tennis -->
+      <article class="project-card reveal">
+        <div class="project-header" onclick="toggleProject(this)">
+          <div class="project-image">
+            <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=640&q=80&auto=format" alt="Tennis" style="object-position: center center;" />
+          </div>
+          <div>
+            <h3 class="project-title">
+              <span class="lang-en">The State of Tennis</span>
+              <span class="lang-cn">网球运动现状研究</span>
+            </h3>
+            <p class="project-brief">
+              <span class="lang-en">Decoded the current tennis landscape through three strategic lenses — tournaments, athletes, and products — benchmarking competitors such as Lululemon and Wilson to identify product strategy gaps and inform future direction.</span>
+              <span class="lang-cn">通过赛事、运动员和产品三大战略框架解码当前网球运动格局，对标 Lululemon、Wilson 等竞品，分析产品策略差异，确定未来产品方向。</span>
+            </p>
+          </div>
+          <button class="project-toggle" aria-label="Expand details">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+        </div>
+        <div class="project-details">
+          <div class="project-details-inner">
+            <div class="project-details-content">
+              <div class="project-tags">
+                <span class="project-tag-pill">Competitive Framework</span>
+                <span class="project-tag-pill">Product Strategy</span>
+                <span class="project-tag-pill">Multi-Dimensional Analysis</span>
+              </div>
+              <p class="project-impact">
+                <span class="lang-en">Built a reusable competitive analysis framework structured around tournaments, athletes, and product ecosystems. Identified strategic gaps between Nike and key competitors (Lululemon, Wilson) in tennis product offerings, driving targeted improvement recommendations.</span>
+                <span class="lang-cn">构建了以赛事、运动员和产品生态为核心的可复用竞品分析框架。发现 Nike 与关键竞品（Lululemon、Wilson）在网球产品线上的战略差距，推动针对性的改进建议。</span>
+              </p>
             </div>
           </div>
         </div>
@@ -1758,6 +1946,7 @@ a:hover { color: var(--color-accent-hover); }
         <p class="footer-contact-item">
           <a href="mailto:Sisi.zhang@outlook.com">Sisi.zhang@outlook.com</a>
         </p>
+
         <p class="footer-contact-item">
           <a href="https://sissimeow.github.io/resume-sisi-zhang/" target="_blank" rel="noopener">sissimeow.github.io/resume-sisi-zhang</a>
         </p>
@@ -1777,7 +1966,7 @@ a:hover { color: var(--color-accent-hover); }
         </div>
       </div>
       <div>
-        <a href="https://raw.githubusercontent.com/SissiMeow/resume-sisi-zhang/main/resume/Resume-Sisi-Zhang.pdf" download class="btn-download">
+        <a href="Resume-Sisi-Zhang.pdf" download class="btn-download">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
             <polyline points="7 10 12 15 17 10"/>
